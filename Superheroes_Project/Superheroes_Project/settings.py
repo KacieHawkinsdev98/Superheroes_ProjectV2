@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--oaufc3d7pj2dhs*c%8st+f7zi5ny1nb5p3low6mhx3jfz)6a6'
+SECRET_KEY = 'django-insecure-u%)x^r1$rh!jivi4_ishg5x57q1s9%y55u=z$yo!!#^e@go2si'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Superhero',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,15 @@ WSGI_APPLICATION = 'Superheroes_Project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'SUPERHEROES_DATABASE',
+        'USER': 'root', 
+        'PASSWORD': 'rabbit', 
+        'HOST': '127.0.0.1',
+        'PORT': '3306', 
+        'OPTIONS': {
+            'autocommit': True
+        }
     }
 }
 
