@@ -22,6 +22,7 @@ def detail(request, superheros_id):
 
 def create(request):
     if request.method == "POST":
+        print(request)
         name = request.POST.get('name')
         alter_ego_name = request.POST.get('alter_ego_name')
         primary_super_ability = request.POST.get('primary_super_ability')
@@ -43,7 +44,7 @@ def edit(request, superheros_id):
        superheros.catchphrase = request.POST.get('catchphrase')
        superheros.save()
        context = {
-          "superheroes": superheros
+          "superheros": superheros
         } 
        return render(request, 'Superhero/detail.html', context)
     else:
