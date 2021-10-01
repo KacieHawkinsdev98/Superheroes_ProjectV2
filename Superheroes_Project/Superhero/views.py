@@ -13,9 +13,9 @@ def index(request):
     return render(request, 'hero/index.html', context)
 
 def detail(request, superhero_id):
-    superhero = Superhero.objects.get(pk=superhero_id)
+    superheros = Superhero.objects.get(pk=superhero_id)
     context = {
-        "selected_hero":superhero
+        "superheros":superheros
     }
     return render(request, 'Superhero/detail.html', context)
     
@@ -27,39 +27,39 @@ def create(request):
         primary_super_ability = request.POST.get('primary_super_ability')
         secondary_super_ability = request.POST.get('secondary_super_ability')
         catchphrase = request.POST.get('catchphrase')
-        new_superhero = Superhero(name=name, alter_ego_name=alter_ego_name, primary_super_ability=primary_super_ability, secondary_super_ability=secondary_super_ability, catchphrase=catchphrase)
-        new_superhero.save()
+        new_superheros = Superhero(name=name, alter_ego_name=alter_ego_name, primary_super_ability=primary_super_ability, secondary_super_ability=secondary_super_ability, catchphrase=catchphrase)
+        new_superheros.save()
         return HttpResponseRedirect(reverse('superhero:index'))
     else:
         return render(request, 'Superhero/create.html')
 
-def edit(request, superhero_id):
-    superhero = Superhero.objects.get(pk=superhero_id)
+def edit(request, superheros_id):
+    superheros = Superhero.objects.get(pk=superheros_id)
     if request.method == "POST":
-       superhero.name = request.POST.get('name')
-       superhero.alter_ego_name = request.POST.get('alter_ego_name')
-       superhero.primary_super_ability = request.POST.get('primary_super_ability')
-       superhero.secondary_super_ability = request.POST.get('secondary_super_ability')
-       superhero.catchphrase = request.POST.get('catchphrase')
-       superhero.save()
+       superheros.name = request.POST.get('name')
+       superheros.alter_ego_name = request.POST.get('alter_ego_name')
+       superheros.primary_super_ability = request.POST.get('primary_super_ability')
+       superheros.secondary_super_ability = request.POST.get('secondary_super_ability')
+       superheros.catchphrase = request.POST.get('catchphrase')
+       superheros.save()
        context = {
-          "superhero":superhero
-        }
+          "superheroes": superheros
+        } 
        return render(request, 'Superhero/detail.html', context)
     else:
         context = {
-           "superhero":superhero
+           "superheros":superheros
         }
         return render(request, 'Superhero/edit.html', context)
 
-def delete(request, superhero_id):
-    superhero = Superhero.objects.get(pk=superhero_id)
+def delete(request, superheros_id):
+    superheros = Superhero.objects.get(pk=superheros_id)
     if request.method == "POST":
-        superhero.delete()
+        superheros.delete()
         return index(request)
     else:
         context = {
-            "superhero": superhero
+            "superheros": superheros
         }
         return render(request, 'Superhero/delete.html', context)
 
